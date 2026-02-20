@@ -69,7 +69,7 @@ export default function Login() {
               label="Password"
               onChangeText={onChange}
               value={value}
-              secureTextEntry={true}
+              type="password"
               error={errors.password?.message}
             />
           )}

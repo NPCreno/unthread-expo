@@ -1,13 +1,15 @@
-import { TextInput, View, Text } from "react-native";
+import { TextInput, View, Text, TouchableOpacity } from "react-native";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { useState } from "react";
 
 interface InputBoxProps {
   label?: string;
   placeholder?: string;
   onChangeText: (text: string) => void;
   value: string;
-  secureTextEntry?: boolean;
   classname?: string;
   error?: string;
+  type?: "text" | "password";
 }
 
 export default function InputBox({
@@ -15,10 +17,12 @@ export default function InputBox({
   onChangeText,
   value,
   placeholder,
-  secureTextEntry,
   classname,
   error,
+  type,
 }: InputBoxProps) {
+  const [isSecure, setIsSecure] = useState(type === "password");
+
   return (
     <View className="w-full">
       {label && (
@@ -32,8 +36,19 @@ export default function InputBox({
         value={value}
         placeholder={placeholder}
         placeholderTextColor="white"
-        secureTextEntry={secureTextEntry}
+        secureTextEntry={isSecure}
       />
+      {type === "password" && (
+        <TouchableOpacity onPress={() => setIsSecure(!isSecure)}>
+          <Ionicons
+            name={isSecure ? "eye" : "eye-off"}
+            size={24}
+            color="white"
+            className="absolute right-2 top-[-30px]"
+            zIndex={20}
+          />
+        </TouchableOpacity>
+      )}
       {error && <Text className="text-red-500">{error}</Text>}
     </View>
   );
