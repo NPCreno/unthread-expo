@@ -5,7 +5,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-  			rancho: ["Rancho_400Regular", "sans-serif"]
+  			rancho: ["Rancho_400Regular", "sans-serif"],
+        lato: ["Lato_400Regular", "sans-serif"]
   		},
     },
   },
